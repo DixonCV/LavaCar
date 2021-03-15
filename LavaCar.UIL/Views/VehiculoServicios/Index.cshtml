@@ -1,0 +1,59 @@
+﻿@model IEnumerable<LavaCar.ETL.VehiculoServicioETL>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Vehiculo Servicios</h1>
+
+<p>
+    <a asp-action="Create">Crear nuevo</a>
+</p>
+<div class="col-8 mb-1">
+
+<form asp-action="FiltrarPorServicio">
+    <select name="IdServicio" class="custom-select col-6">
+        <option value="">Todos</option>
+        @foreach (var servicio in ViewBag.Servicio)
+        {
+            <option value="@servicio.Value">@servicio.Text</option>
+        }
+
+    </select>
+    <input type="submit" value="Filtrar" class="btn btn-primary col-2" />
+</form>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdServicioNavigation.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdVehiculoNavigation.Placa)
+            </th>
+            <th>
+                Acciones
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdServicioNavigation.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdVehiculoNavigation.Placa)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdVehiculoServicio">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdVehiculoServicio">Detalles</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdVehiculoServicio">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
